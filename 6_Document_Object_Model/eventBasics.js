@@ -1,6 +1,13 @@
+const ul=document.querySelector('ul')
 const button = document.querySelector('button')
+
 button.addEventListener('click', () => {
-    console.log('button clicked')
+    ul.innerHTML+='<li>new todo added</li>'
+
+    const li=document.createElement('li')
+    li.textContent='new todo added'
+    ul.append(li)
+    ul.prepend(li)
 })
 
 const todoList = document.querySelectorAll('li')
