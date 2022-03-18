@@ -1,11 +1,20 @@
-.error{
-padding:10px;
-color:limegreen;
-border:1px  dotted green;
+.error {
+  padding: 10px;
+  color: limegreen;
+  border: 1px dotted green;
 }
 
-.success{
-    padding:10px;
-    color:crimson;
-    border:1px dotted crimson;
+.success {
+  padding: 10px;
+  color: crimson;
+  border: 1px dotted crimson;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  margin: 10px 0;
+  background: #eee;
+  text-align: center;
+  padding: 20px;
 }
