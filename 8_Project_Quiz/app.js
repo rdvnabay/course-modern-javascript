@@ -13,10 +13,22 @@ form.addEventListener('submit', e => {
             score += 25
     })
 
-    scrollTo(0,0)
-    result.querySelector('span').textContent = `${score}%`
-    result.classList.remove('d-none')
+    scrollTo(0, 0)
     //result
+   
+    result.classList.remove('d-none')
+
+    let output = 0
+    let timer = setInterval(() => {
+        result.querySelector('span').textContent = `${output}%`
+        if (output === score)
+            clearInterval(timer)
+        else{
+            output++
+         
+        }            
+    }, 10)
+
 })
 console.log(form)
 
@@ -34,4 +46,11 @@ setTimeout(() => {
 
 window.setTimeout(() => {
     window.console.log('window setTimeout')
+}, 2000)
+
+//setInterval
+let counter = 0
+setInterval(() => {
+    counter++
+    console.log(counter)
 }, 2000)
