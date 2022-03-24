@@ -1,5 +1,6 @@
 const form = document.querySelector('.form')
 const ul = document.querySelector('.todos')
+const search = document.querySelector('.search input')
 
 const generateTodo = value => {
     const li = `
@@ -19,7 +20,7 @@ form.addEventListener('submit', e => {
     if (todo.length) {
         generateTodo(todo)
         form.reset()
-    } 
+    }
 })
 
 ul.addEventListener('click', e => {
@@ -27,3 +28,21 @@ ul.addEventListener('click', e => {
     if (e.target.classList.contains('delete'))
         e.target.parentElement.remove()
 })
+
+
+//searching
+search.addEventListener('keyup', e => {
+    const term = search.value.toLowerCase().trim()
+    filterTodos(term)
+})
+
+const filterTodos = term => {
+
+    Array.from(ul.children)
+        .filter(li => !li.textContent.toLocaleLowerCase().includes(term))
+        .forEach(li => li.classList.add('filtered'))
+
+    Array.from(ul.children)
+        .filter(li => li.textContent.toLocaleLowerCase().includes(term))
+        .forEach(li => li.classList.remove('filtered'))
+}
