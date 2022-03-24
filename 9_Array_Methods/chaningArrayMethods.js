@@ -20,4 +20,4 @@ const result = products
     .map(p => `the ${p.name} is ${p.price / 2} pounds`)
 
 console.log(result)
-// [ 'the gold star is 15 pounds', 'the red shell is 25 pounds' ]
+    // [ 'the gold star is 15 pounds', 'the red shell is 25 pounds' ]
