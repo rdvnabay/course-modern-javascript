@@ -10,7 +10,7 @@ const getTodos = (callback) => {
     })
 
     // request.open('get', 'https://jsonplaceholder.typicode.com/todos')
-    request.open('get', 'todos.json')
+    request.open('get', 'data/todos.json')
     request.send()
 }
 
