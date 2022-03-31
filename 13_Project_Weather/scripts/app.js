@@ -23,11 +23,7 @@ const updateCity = async (city) => {
 
 
 const updateUI = (data) => {
-    const cityDetail = data.cityDetail
-    const weather = data.weather
-
-    console.log('cityDetail', cityDetail)
-    console.log('weather', weather)
+    const { cityDetail, weather } = data
 
     details.innerHTML = `
     <h5 class="my-3">${cityDetail.LocalizedName}</h5>
