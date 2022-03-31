@@ -20,6 +20,6 @@ const getCity = async (city) => {
     return data[0]
 }
 
-getCity('istanbul')
-    .then(data => getWeather(data.Key))
-    .then(data => console.log(data))
+// getCity('istanbul')
+//     .then(data => getWeather(data.Key))
+//     .then(data => console.log(data))
