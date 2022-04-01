@@ -11,4 +11,13 @@ let age = localStorage.age
 localStorage.name='luigi'
 localStorage.setItem('age',29)
 
+
+//deleting data from local storage
+localStorage.removeItem('name')
+
+//deleting all data from local storage
+localStorage.clear()
+
 console.log(name, age)
+
+
