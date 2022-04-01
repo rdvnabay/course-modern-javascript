@@ -4,6 +4,7 @@ const details = document.querySelector('.details')
 const time = document.querySelector('img.time')
 const icon = document.querySelector('.icon img')
 
+
 form.addEventListener('submit', e => {
     e.preventDefault()
 
@@ -11,10 +12,16 @@ form.addEventListener('submit', e => {
     form.reset()
 
     //request
-    updateCity(city).then(data => updateUI(data))
+    updateCity(city)
+        .then(data => updateUI(data))
+        .catch(err => console.log(err))
 
-
+    //set local storage
+    localStorage.setItem('city', city)
 })
+
+
+  
 
 const updateCity = async (city) => {
     const cityDetail = await getCity(city)
@@ -22,7 +29,6 @@ const updateCity = async (city) => {
 
     return { cityDetail, weather }
 }
-
 
 const updateUI = (data) => {
     const { cityDetail, weather } = data
@@ -37,9 +43,7 @@ const updateUI = (data) => {
     `
 
     //update the night/day & icon images
-
     let timeSrc = weather.IsDayTime ? 'img/day.svg' : 'img/night.svg'
-
     time.setAttribute('src', timeSrc)
 
     const iconSrc = `img/icons/${weather.WeatherIcon}.svg`
@@ -47,4 +51,10 @@ const updateUI = (data) => {
 
     if (card.classList.contains('d-none'))
         card.classList.remove('d-none')
+}
+
+if (localStorage.getItem('city')){
+    updateCity(localStorage.getItem('city'))
+    .then(data => updateUI(data))
+    .catch(err => console.log(err))
 }
