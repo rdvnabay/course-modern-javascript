@@ -21,6 +21,11 @@ class User {
 
 //Inheritance
 class Admin extends User {
+    constructor(name, email, age) {
+        super(name, email)
+        this.age = age
+    }
+    
     deleteUser(user) {
         users = users.filter(u => u.name !== user.name)
     }
@@ -29,7 +34,7 @@ class Admin extends User {
 
 const userOne = new User('ridvan', 'ridvan@mail.com')
 const userTwo = new User('mert', 'mert@mail.com')
-const userThree = new Admin('recep', 'recep@mail.com')
+const userThree = new Admin('recep', 'recep@mail.com', 26)
 
 //method chaining
 userOne.logIn().incScore().incScore().incScore().logOut()
