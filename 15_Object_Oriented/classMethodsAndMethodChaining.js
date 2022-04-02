@@ -19,26 +19,22 @@ class User {
     }
 }
 
+//Inheritance
+class Admin extends User {
+    deleteUser(user) {
+        users = users.filter(u => u.name !== user.name)
+    }
+}
+
+
 const userOne = new User('ridvan', 'ridvan@mail.com')
 const userTwo = new User('mert', 'mert@mail.com')
-
-console.log(userOne, userTwo)
-
-
-// userOne.logIn()
-// userOne.incScore()
-// userOne.incScore()
-// userOne.incScore()
-// userOne.logOut()
+const userThree = new Admin('recep', 'recep@mail.com')
 
 //method chaining
 userOne.logIn().incScore().incScore().incScore().logOut()
 
-//result 
-/* 
-ridvan just logged in
-ridvan has a score of 1
-ridvan has a score of 2
-ridvan has a score of 3
-ridvan just logged out
-*/
+//user list
+let users = [userOne, userTwo, userThree]
+userThree.deleteUser(userOne)
+console.log(users)
