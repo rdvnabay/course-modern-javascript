@@ -3,7 +3,7 @@ const form = document.querySelector('form')
 
 const getRecipes = () => {
     db.collection('recipes').get()
-        .then(snapshot => snapshot.docs.forEach(doc => addRecipe(doc.data())))
+        .then(snapshot => snapshot.docs.forEach(doc => addRecipeToHtml(doc.data(), doc.id)))
         .catch(err => console.log(err))
 }
 
@@ -13,12 +13,19 @@ const saveToDb = (recipe) => {
         .catch(err => console.log(err))
 }
 
-const addRecipe = (recipe) => {
+const deleteToDb = (id) => {
+    db.collection('recipes').doc(id).delete()
+        .then(console.log('deleted'))
+        .catch(err => console.log(err))
+}
+
+const addRecipeToHtml = (recipe, id) => {
     const time = recipe.created_at.toDate()
     const html = `
-    <li>
+    <li data-id=${id}>
          <div>${recipe.title}</div>
          <div>${time}</div>
+         <button class="btn btn-danger">Delete</button>
     </li>`
 
     ul.innerHTML += html
@@ -34,8 +41,14 @@ form.addEventListener('submit', e => {
         title: title,
         created_at: firebase.firestore.Timestamp.fromDate(now)
     }
-
     saveToDb(recipe)
+})
+
+ul.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+        const id = e.target.parentElement.getAttribute('data-id')
+        deleteToDb(id)
+    }
 })
 
 getRecipes()
