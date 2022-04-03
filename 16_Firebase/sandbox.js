@@ -1,6 +1,8 @@
 const ul = document.querySelector('ul')
 const form = document.querySelector('form')
+const button = document.querySelector('button')
 
+//#region recipes Collection
 const getRecipes = () => {
     db.collection('recipes').get()
         .then(snapshot => snapshot.docs.forEach(doc => addRecipeToHtml(doc.data(), doc.id)))
@@ -18,7 +20,12 @@ const deleteToDb = (id) => {
         .then(console.log('deleted'))
         .catch(err => console.log(err))
 }
+//#endregion
 
+
+getRecipes()
+
+//#region html
 const addRecipeToHtml = (recipe, id) => {
     const time = recipe.created_at.toDate()
     const html = `
@@ -38,7 +45,10 @@ const removeRecipeToHtml = (id) => {
             recipe.remove()
     })
 }
+//#endregion
 
+
+//#region event listeners
 form.addEventListener('submit', e => {
     e.preventDefault()
 
@@ -60,9 +70,13 @@ ul.addEventListener('click', e => {
     }
 })
 
-getRecipes()
+//unsub from database
+button.addEventListener('click', () => {
+    unsub()
+    console.log('unsubscribed from collection changes')
+})
 
-db.collection('recipes').onSnapshot(snapshot => {
+const unsub = db.collection('recipes').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(change => {
         const doc = change.doc
         if (change.type === 'added')
@@ -71,4 +85,5 @@ db.collection('recipes').onSnapshot(snapshot => {
             removeRecipeToHtml(doc.id)
     })
 })
+//#endregion
 
