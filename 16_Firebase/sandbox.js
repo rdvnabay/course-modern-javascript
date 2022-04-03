@@ -31,6 +31,14 @@ const addRecipeToHtml = (recipe, id) => {
     ul.innerHTML += html
 }
 
+const removeRecipeToHtml = (id) => {
+    const recipes = document.querySelectorAll('li')
+    recipes.forEach(recipe => {
+        if (recipe.getAttribute('data-id') === id)
+            recipe.remove()
+    })
+}
+
 form.addEventListener('submit', e => {
     e.preventDefault()
 
@@ -41,6 +49,7 @@ form.addEventListener('submit', e => {
         title: title,
         created_at: firebase.firestore.Timestamp.fromDate(now)
     }
+    form.reset()
     saveToDb(recipe)
 })
 
@@ -52,4 +61,14 @@ ul.addEventListener('click', e => {
 })
 
 getRecipes()
+
+db.collection('recipes').onSnapshot(snapshot => {
+    snapshot.docChanges().forEach(change => {
+        const doc = change.doc
+        if (change.type === 'added')
+            addRecipeToHtml(doc.data(), doc.id)
+        else if (change.type === 'removed')
+            removeRecipeToHtml(doc.id)
+    })
+})
 
