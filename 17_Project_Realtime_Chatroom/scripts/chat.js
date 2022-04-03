@@ -4,6 +4,7 @@ class Chatroom {
         this.user = user
         this.chats = db.collection('chats')
     }
+
     async addChat(message) {
         const now = new Date()
         const chat = {
@@ -16,10 +17,20 @@ class Chatroom {
         const response = await this.chats.add(chat)
         return response
     }
+
+    getChats(callback) {
+        this.chats.onSnapshot(snapshot => {
+            snapshot.docChanges().forEach(change => {
+                if (change.type === 'added')
+                    callback(change.doc.data())
+            })
+        })
+    }
 }
 
 const chatroom = new Chatroom("general", "rıdvan")
-chatroom.addChat("hi everyone")
-    .then(() => console.log('message send'))
-    .catch(err => console.log('message failed'))
+
+chatroom.getChats(data=>{
+    console.log(data)
+})
 
