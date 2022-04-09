@@ -1,1 +1,1 @@
-(()=>{const l=l=>{console.log(`hello ${l}`)};l("mario"),l("luigi"),l("chun-li")})();
+(()=>{"use strict";const e=document.querySelector("body");e.style.background="orange",(o=>{const t=document.createElement("h1");t.textContent="hello hello world",e.appendChild(t)})(),console.log("mario.net")})();
