@@ -1,1 +1,1 @@
-(()=>{"use strict";const e=document.querySelector("body");e.style.background="orange",(o=>{const t=document.createElement("h1");t.textContent="hello hello world",e.appendChild(t)})(),console.log("mario.net")})();
+(()=>{"use strict";const e=document.querySelector("body");e.style.background="orange",(o=>{const m=document.createElement("h1");m.textContent="hello hello world",e.appendChild(m)})(),console.log("mario.net");const o=[{name:"mario",premium:!0},{name:"chun-li",premium:!1},{name:"ryu",premium:!1},{name:"luigi",premium:!0}].filter((e=>e.premium));console.log(o)})();
