@@ -5,5 +5,10 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
         filename: 'bundle.js'
+    },
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        public: '/assets/',
+        hot: "only",
     }
 }
